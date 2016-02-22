@@ -1,0 +1,12 @@
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\bin\Debug\SBUpdate.exe.config
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\bin\Debug\SBUpdate.exe
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\bin\Debug\SBUpdate.pdb
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\bin\Debug\Microsoft.Azure.NotificationHubs.dll
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\bin\Debug\Microsoft.ServiceBus.dll
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\bin\Debug\Microsoft.WindowsAzure.Configuration.dll
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\bin\Debug\Microsoft.Azure.NotificationHubs.xml
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\bin\Debug\Microsoft.ServiceBus.xml
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\bin\Debug\Microsoft.WindowsAzure.Configuration.xml
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\obj\Debug\SBUpdate.csprojResolveAssemblyReference.cache
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\obj\Debug\SBUpdate.exe
+C:\Users\bobfa\Source\Repos\D2C2D\tools\ServiceBusUtil\obj\Debug\SBUpdate.pdb

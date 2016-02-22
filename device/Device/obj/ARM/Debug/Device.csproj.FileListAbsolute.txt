@@ -1,0 +1,11 @@
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\Device.csprojResolveAssemblyReference.cache
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\App.g.i.cs
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\App.g.cs
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\MainPage.g.i.cs
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\MainPage.g.cs
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\XamlTypeInfo.g.cs
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\App.xaml
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\MainPage.xaml
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\App.xbf
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\MainPage.xbf
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\ARM\Debug\XamlSaveStateFile.xml

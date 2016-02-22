@@ -1,0 +1,64 @@
+    {  
+       "location":"East US",
+       "properties":{  
+          "sku":{  
+             "name":"standard"
+          },
+          "outputStartTime":"2016-02-20 16:13:48Z",
+          "outputStartMode":"CustomTime",
+          "eventsOutOfOrderPolicy":"drop",
+          "eventsOutOfOrderMaxDelayInSeconds":10,
+          "inputs":[  
+             {  
+                "name":"iothub",
+                "properties":{  
+                   "type":"stream",
+                   "serialization":{  
+                      "type":"JSON",
+                      "properties":{  
+                         "encoding":"UTF8"
+                      }
+                   },
+                   "datasource":{  
+                      "type":"Microsoft.Devices/IotHubs",
+                      "properties":{  
+                        "iotHubNamespace": "d2c2diothubtst",
+                        "sharedAccessPolicyKey": "qYvFvKCdrl++pQwHcLcp1FyYXVwT6fURb/Bi5Mhhf/I=",
+                        "sharedAccessPolicyName": "iothubowner"
+                      }
+                   }
+                }
+             }
+          ],
+          "transformation":{  
+             "name":"d2c2d-send2queue",
+             "properties":{  
+                "streamingUnits":1,
+                "query": "select * into queue from iothub"
+             }
+          },
+        "outputs": [
+          {
+            "name": "queue",
+            "properties": {
+              "type": "stream",
+              "serialization": {
+                "type": "JSON",
+                "properties": {
+                  "encoding": "UTF8"
+                }
+              },
+              "datasource": {
+                "type": "Microsoft.ServiceBus/Queue",
+                "properties": {
+                    "serviceBusNamespace":"d2c2dsbnametst",
+                    "sharedAccessPolicyName":"RootManageSharedAccessKey",
+                    "sharedAccessPolicyKey":"t/uTlIH2/qy87vY7/G9XPlZP8oDG5xyp6IukvyneR30=",
+                    "queueName":"messagedrop"
+                }
+              }
+            }
+          }
+        ]
+      }
+  }

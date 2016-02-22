@@ -1,0 +1,1 @@
+C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\dashboard\Dashboard\bin\Debug\Dashboard.exe.config

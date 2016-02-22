@@ -1,0 +1,6 @@
+C:\Users\bobfa\Source\Repos\D2C2D\tools\IoTHubProvision\IoTHubProvision\bin\Debug\IioTHubProvision.exe.config
+C:\Users\bobfa\Source\Repos\D2C2D\tools\IoTHubProvision\IoTHubProvision\obj\Debug\IioTHubProvision.exe
+C:\Users\bobfa\Source\Repos\D2C2D\tools\IoTHubProvision\IoTHubProvision\obj\Debug\IioTHubProvision.pdb
+C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\tools\IoTHubProvision\IoTHubProvision\bin\Debug\IioTHubProvision.exe.config
+C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\tools\IoTHubProvision\IoTHubProvision\obj\Debug\IioTHubProvision.exe
+C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\tools\IoTHubProvision\IoTHubProvision\obj\Debug\IioTHubProvision.pdb

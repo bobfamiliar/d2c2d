@@ -1,0 +1,33 @@
+﻿<Window x:Class="Looksfamiliar.D2C2D.Dashboard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:local="clr-namespace:Looksfamiliar.D2C2D.Dashboard"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1050"
+        Loaded="MainWindow_OnLoaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25*"></ColumnDefinition>
+            <ColumnDefinition Width="75*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
+            <Button x:Name="PingButton" Height="50" Margin="10,10,10,10" Content="Ping" FontSize="24"></Button>
+            <Button x:Name="StartButton" Height="50" Margin="10,10,10,10" Content="Start" FontSize="24" Click="StartButton_Click"></Button>
+            <Button x:Name="StopButton" Height="50" Margin="10,10,10,10" Content="Stop" FontSize="24" Click="StopButton_Click"></Button>
+        </StackPanel>
+
+        <m:Map Grid.Column="1" Grid.Row="0" x:Name="MyMap"  CredentialsProvider="AvmFWcBVLBGHTKDX9pdp_R9EOr-qyApvJ5Lb4fmnq1jiY0c2xLXaU3PAlnRawtCf" Mode="Road" Center="42.0,-71" ZoomLevel="12" AnimationLevel="Full"/>
+
+        <TextBox x:Name="PingFeed" Grid.Column="0" Grid.Row="1" Margin="10,10,10,10" IsEnabled="true" VerticalScrollBarVisibility="Auto"></TextBox>
+        <TextBox x:Name="TelemetryFeed" Grid.Column="1" Grid.Row="1" Margin="10,10,10,10" IsEnabled="true" VerticalScrollBarVisibility="Auto"></TextBox>
+    </Grid>
+</Window>
