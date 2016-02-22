@@ -1,0 +1,1 @@
+C:\Users\bobfa\Source\Repos\D2C2D\device\Device\Device\Device.csproj;arm

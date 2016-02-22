@@ -25,7 +25,7 @@
             <Button x:Name="StopButton" Height="50" Margin="10,10,10,10" Content="Stop" FontSize="24" Click="StopButton_Click"></Button>
         </StackPanel>
 
-        <m:Map Grid.Column="1" Grid.Row="0" x:Name="MyMap"  CredentialsProvider="AvmFWcBVLBGHTKDX9pdp_R9EOr-qyApvJ5Lb4fmnq1jiY0c2xLXaU3PAlnRawtCf" Mode="Road" Center="42.0,-71" ZoomLevel="12" AnimationLevel="Full"/>
+        <!--<m:Map Grid.Column="1" Grid.Row="0" x:Name="MyMap"  CredentialsProvider="AvmFWcBVLBGHTKDX9pdp_R9EOr-qyApvJ5Lb4fmnq1jiY0c2xLXaU3PAlnRawtCf" Mode="Road" Center="42.0,-71" ZoomLevel="12" AnimationLevel="Full"/>-->
 
         <TextBox x:Name="PingFeed" Grid.Column="0" Grid.Row="1" Margin="10,10,10,10" IsEnabled="true" VerticalScrollBarVisibility="Auto"></TextBox>
         <TextBox x:Name="TelemetryFeed" Grid.Column="1" Grid.Row="1" Margin="10,10,10,10" IsEnabled="true" VerticalScrollBarVisibility="Auto"></TextBox>
