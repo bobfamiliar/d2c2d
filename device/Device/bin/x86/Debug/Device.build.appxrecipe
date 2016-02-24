@@ -21,9 +21,6 @@
     <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Device.exe">
       <PackagePath>entrypoint\Device.exe</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\.nuget\packages\MessageModelsNet5\5.0.5895.31077\lib\.NETCore50\MessageModelsNet5.dll">
-      <PackagePath>MessageModelsNet5.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\bobfa\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
     </AppxPackagedFile>
@@ -335,9 +332,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\bobfa\.nuget\packages\System.Xml.XmlSerializer\4.0.10\lib\netcore50\System.Xml.XmlSerializer.dll">
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\.nuget\packages\Microsoft.Azure.Devices.Client\1.0.2\lib\uap10.0\Microsoft.Azure.Devices.Client.winmd">
-      <PackagePath>Microsoft.Azure.Devices.Client.winmd</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>

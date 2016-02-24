@@ -9,8 +9,8 @@
     <SolutionConfiguration>Debug|x86</SolutionConfiguration>
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>1751aa62-f00f-46aa-b568-7108fcde8bec</PackageIdentityName>
-    <IntermediateOutputPath>C:\Users\bobfa\Source\Repos\D2C2D\device\Device\obj\x86\Debug\</IntermediateOutputPath>
-    <RegisteredManifestChecksum>166D4011711905957A6D2E08E7FA2172D48E617659FF87E610EE3FD8A62D7DEE</RegisteredManifestChecksum>
+    <IntermediateOutputPath>C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\obj\x86\Debug\</IntermediateOutputPath>
+    <RegisteredManifestChecksum>E5FACEA499FBDE46D387BF95D2233C36F0D005674B32B897FE7747FDAF615A59</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>1751aa62-f00f-46aa-b568-7108fcde8bec_1.0.0.0_x86__fef28yy3ctmr4</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>1751aa62-f00f-46aa-b568-7108fcde8bec_fef28yy3ctmr4!App</RegisteredUserModeAppID>
     <RegisteredPackageID>1751aa62-f00f-46aa-b568-7108fcde8bec</RegisteredPackageID>
@@ -19,20 +19,16 @@
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-02-21T22:36:49.600</Modified>
+      <Modified>2016-02-23T02:02:07.027</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\bin\x86\Debug\Device.exe">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Device.exe">
       <PackagePath>entrypoint\Device.exe</PackagePath>
-      <Modified>2016-02-21T22:36:49.045</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\.nuget\packages\MessageModelsNet5\5.0.5895.31077\lib\.NETCore50\MessageModelsNet5.dll">
-      <PackagePath>MessageModelsNet5.dll</PackagePath>
-      <Modified>2016-02-21T22:22:39.007</Modified>
+      <Modified>2016-02-23T02:02:05.765</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\bobfa\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -450,49 +446,45 @@
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
       <Modified>2015-10-03T19:33:55.165</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\.nuget\packages\Microsoft.Azure.Devices.Client\1.0.2\lib\uap10.0\Microsoft.Azure.Devices.Client.winmd">
-      <PackagePath>Microsoft.Azure.Devices.Client.winmd</PackagePath>
-      <Modified>2016-02-19T01:41:58.729</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
       <Modified>2016-02-20T23:30:21.117</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
       <Modified>2015-10-11T02:09:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-10-11T02:09:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-10-11T02:09:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-10-11T02:09:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-10-11T02:09:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-10-11T02:09:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2015-10-11T02:09:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\bin\x86\Debug\Device.xr.xml">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Device.xr.xml">
       <PackagePath>Device.xr.xml</PackagePath>
       <Modified>2016-02-21T22:36:48.918</Modified>
     </AppxPackagedFile>
@@ -500,13 +492,13 @@
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
       <Modified>2015-12-19T18:26:48.831</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-02-21T22:36:49.439</Modified>
+      <Modified>2016-02-23T02:02:06.699</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\D2C2D\device\Device\bin\x86\Debug\Core\Device.exe">
+    <AppxPackagedFile Include="C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Core\Device.exe">
       <PackagePath>Device.exe</PackagePath>
-      <Modified>2016-02-21T22:36:49.598</Modified>
+      <Modified>2016-02-23T02:02:07.012</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

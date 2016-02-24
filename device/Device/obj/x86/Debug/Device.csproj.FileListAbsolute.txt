@@ -203,8 +203,6 @@ C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Ap
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Core\AppxManifest.xml
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Core\Device.exe
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Device.build.appxrecipe
-C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\MessageModelsNet5.dll
-C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Microsoft.Azure.Devices.Client.winmd
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\Microsoft.CSharp.dll
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\System.ComponentModel.DataAnnotations.dll
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\bin\x86\Debug\System.Core.dll
@@ -376,7 +374,6 @@ C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\obj\x86\Debug\Fx
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\obj\x86\Debug\FxResources.System.Xml.XDocument.SR.resw
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\obj\x86\Debug\FxResources.System.Xml.XmlDocument.SR.resw
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\obj\x86\Debug\FxResources.System.Xml.XmlSerializer.SR.resw
-C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\obj\x86\Debug\Device.csproj.GenerateResource.Cache
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\obj\x86\Debug\priconfig.xml
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\obj\x86\Debug\priconfig.xml.intermediate
 C:\Users\bobfa\Source\Repos\d2c2d-iot-azure\d2c2d\device\Device\obj\x86\Debug\layout.resfiles

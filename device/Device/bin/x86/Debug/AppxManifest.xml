@@ -31,20 +31,6 @@
   <Capabilities>
     <Capability Name="internetClient" />
   </Capabilities>
-  <Extensions>
-    <Extension Category="windows.activatableClass.inProcessServer">
-      <InProcessServer>
-        <Path>CLRHost.dll</Path>
-        <ActivatableClass ActivatableClassId="Microsoft.Azure.Devices.Client.DeviceClient" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Microsoft.Azure.Devices.Client.DeviceAuthenticationWithToken" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Microsoft.Azure.Devices.Client.Message" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Microsoft.Azure.Devices.Client.DeviceAuthenticationWithRegistrySymmetricKey" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Microsoft.Azure.Devices.Client.AuthenticationMethodFactory" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Microsoft.Azure.Devices.Client.IotHubConnectionStringBuilder" ThreadingModel="both" />
-        <ActivatableClass ActivatableClassId="Microsoft.Azure.Devices.Client.DeviceAuthenticationWithSharedAccessPolicyKey" ThreadingModel="both" />
-      </InProcessServer>
-    </Extension>
-  </Extensions>
   <build:Metadata>
     <build:Item Name="TargetFrameworkMoniker" Value=".NETCore,Version=v5.0" />
     <build:Item Name="VisualStudio" Version="14.0" />
