@@ -18,7 +18,7 @@ class Program
 
         foreach (var receiver in d2CPartitions.Select(partition => eventHubClient.GetDefaultConsumerGroup().CreateReceiver(partition, DateTime.Now)))
         {
-            ReceiveMessagesFromDeviceAsync(receiver).Wait();
+            ReceiveMessagesFromDeviceAsync(receiver);
         }
         Console.ReadLine();
     }

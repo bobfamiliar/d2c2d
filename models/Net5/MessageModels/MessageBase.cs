@@ -15,12 +15,14 @@ namespace Looksfamiliar.d2c2d.MessageModels
         public MessageBase()
         {
             Id = Guid.NewGuid().ToString();
+            DeviceId = string.Empty;
             MessageType = MessageTypeEnum.NotSet;
             Longitude = 0.0;
             Latitude = 0.0;
             Timestamp = DateTime.Now;
         }
         public string Id { get; set; }
+        public string DeviceId { get; set; }
         public MessageTypeEnum MessageType { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
