@@ -4,6 +4,38 @@ namespace Looksfamiliar.d2c2d.MessageModels
 {
     public class Climate : MessageBase
     {
+        public Climate()
+        {
+            Humidity = 0;
+            Temperature = 0;
+            MessageType = MessageTypeEnum.Climate;
+        }
+
+        public double Humidity { get; set; }
+        public double Temperature { get; set; }
+
+    }
+
+    public class ClimateSettings : MessageBase
+    {
+        public ClimateSettings()
+        {
+            MinHumidity = 0;
+            MaxHumiditiy = 0;
+            MinTemperature = 0;
+            MaxTemperature = 0;
+        }
+
+        public double MinHumidity { get; set; }
+        public double MaxHumiditiy { get; set; }
+        public double MinTemperature { get; set; }
+        public double MaxTemperature { get; set; }
+    }
+}
+
+/*
+    public class Climate : MessageBase
+    {
         private const double C1 = -42.379;
         private const double C2 = 2.04901523;
         private const double C3 = 10.14333127;
@@ -41,19 +73,4 @@ namespace Looksfamiliar.d2c2d.MessageModels
         }
     }
 
-    public class ClimateSettings : MessageBase
-    {
-        public ClimateSettings()
-        {
-            MinHumidity = 0;
-            MaxHumiditiy = 0;
-            MinTemperature = 0;
-            MaxTemperature = 0;
-        }
-
-        public double MinHumidity { get; set; }
-        public double MaxHumiditiy { get; set; }
-        public double MinTemperature { get; set; }
-        public double MaxTemperature { get; set; }
-    }
-}
+    */

@@ -21,6 +21,7 @@ namespace Looksfamiliar.d2c2d.MessageModels
             Latitude = 0.0;
             Timestamp = DateTime.Now;
         }
+
         public string Id { get; set; }
         public string DeviceId { get; set; }
         public MessageTypeEnum MessageType { get; set; }

@@ -1,10 +1,7 @@
-C:\Users\bobfa\Source\Repos\D2C2D\models\Net4\MessageModels\MessageModels\bin\Debug\MessageModelsNet4.dll
-C:\Users\bobfa\Source\Repos\D2C2D\models\Net4\MessageModels\MessageModels\bin\Debug\MessageModelsNet4.pdb
-C:\Users\bobfa\Source\Repos\D2C2D\models\Net4\MessageModels\MessageModels\obj\Debug\MessageModels.csprojResolveAssemblyReference.cache
-C:\Users\bobfa\Source\Repos\D2C2D\models\Net4\MessageModels\MessageModels\obj\Debug\MessageModelsNet4.dll
-C:\Users\bobfa\Source\Repos\D2C2D\models\Net4\MessageModels\MessageModels\obj\Debug\MessageModelsNet4.pdb
 c:\users\bobfa\source\repos\d2c2d\models\net4\MessageModels\bin\Debug\MessageModelsNet4.dll
 c:\users\bobfa\source\repos\d2c2d\models\net4\MessageModels\bin\Debug\MessageModelsNet4.pdb
 c:\users\bobfa\source\repos\d2c2d\models\net4\MessageModels\obj\Debug\MessageModelsNet4.dll
 c:\users\bobfa\source\repos\d2c2d\models\net4\MessageModels\obj\Debug\MessageModelsNet4.pdb
+C:\Users\bobfa\Source\Repos\D2C2D\models\Net4\MessageModels\bin\Debug\Newtonsoft.Json.dll
+C:\Users\bobfa\Source\Repos\D2C2D\models\Net4\MessageModels\bin\Debug\Newtonsoft.Json.xml
 c:\users\bobfa\source\repos\d2c2d\models\net4\MessageModels\obj\Debug\MessageModels.csprojResolveAssemblyReference.cache

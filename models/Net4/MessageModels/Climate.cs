@@ -41,7 +41,7 @@ namespace Looksfamiliar.d2c2d.MessageModels
         }
     }
 
-    public class ClimateSettings : MessageBase
+    public class ClimateSettings
     {
         public ClimateSettings()
         {

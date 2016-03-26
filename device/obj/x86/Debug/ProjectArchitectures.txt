@@ -1,1 +1,0 @@
-c:\users\bobfa\documents\visual studio 2015\Projects\Win10CoreAzureIoT\Win10CoreAzureIoT\Win10CoreAzureIoT.csproj;x86

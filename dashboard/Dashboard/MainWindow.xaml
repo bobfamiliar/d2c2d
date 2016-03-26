@@ -20,14 +20,27 @@
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
-            <Button x:Name="PingButton" Height="50" Margin="10,10,10,10" Content="Ping" FontSize="24"></Button>
-            <Button x:Name="StartButton" Height="50" Margin="10,10,10,10" Content="Start" FontSize="24" Click="StartButton_Click"></Button>
-            <Button x:Name="StopButton" Height="50" Margin="10,10,10,10" Content="Stop" FontSize="24" Click="StopButton_Click"></Button>
+            <Button x:Name="ProvisionButton" Height="30" Margin="10,5,10,5" Content="New Device" FontSize="16" Click="ProvisionButton_Click"></Button>
+            <Button x:Name="PingButton" Height="30" Margin="10,5,10,5" Content="Ping" FontSize="16"></Button>
+            <Button x:Name="StartButton" Height="30" Margin="10,5,10,5" Content="Start" FontSize="16" Click="StartButton_Click"></Button>
+            <Button x:Name="StopButton" Height="30" Margin="10,5,10,5" Content="Stop" FontSize="16" Click="StopButton_Click"></Button>
+            <TextBlock Margin="10,10,10,10" TextAlignment="Center" FontSize="16">Heartbeat</TextBlock>
+            <TextBox x:Name="PingFeed" Margin="10,0,10,10" Height="250" IsEnabled="true" VerticalScrollBarVisibility="Auto"></TextBox>
         </StackPanel>
 
-        <!--<m:Map Grid.Column="1" Grid.Row="0" x:Name="MyMap"  CredentialsProvider="AvmFWcBVLBGHTKDX9pdp_R9EOr-qyApvJ5Lb4fmnq1jiY0c2xLXaU3PAlnRawtCf" Mode="Road" Center="42.0,-71" ZoomLevel="12" AnimationLevel="Full"/>-->
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical">
+            <TextBlock Margin="10,5,10,5" TextAlignment="Center" FontSize="16">Devices</TextBlock>
+            <ListBox x:Name="DeviceList" Width="750" Height="100" Margin="10,5,10,10" SelectionChanged="DeviceList_OnSelectionChanged" ></ListBox>
+            <!--<m:Map  x:Name="MyMap"  Width="750" Height="300" Mode="Road" CredentialsProvider="[YOUR-BING-MAPS-KEY-HERE]" Center="42.0,-71" ZoomLevel="12" AnimationLevel="Full"/>-->
+        </StackPanel>
 
-        <TextBox x:Name="PingFeed" Grid.Column="0" Grid.Row="1" Margin="10,10,10,10" IsEnabled="true" VerticalScrollBarVisibility="Auto"></TextBox>
-        <TextBox x:Name="TelemetryFeed" Grid.Column="1" Grid.Row="1" Margin="10,10,10,10" IsEnabled="true" VerticalScrollBarVisibility="Auto"></TextBox>
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <TextBlock Margin="10,10,10,10" TextAlignment="Center" FontSize="16">Alarms</TextBlock>
+            <TextBox x:Name="AlarmFeed"  Margin="10,0,10,10" Height="140" IsEnabled="true" VerticalScrollBarVisibility="Auto"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock Margin="10,10,10,10" TextAlignment="Center" FontSize="16">Telemetry</TextBlock>
+            <TextBox x:Name="TelemetryFeed"  Margin="10,0,10,10" Height="140" IsEnabled="true" VerticalScrollBarVisibility="Auto"></TextBox>
+        </StackPanel>
     </Grid>
 </Window>

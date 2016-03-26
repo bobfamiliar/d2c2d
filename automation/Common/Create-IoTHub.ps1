@@ -65,12 +65,11 @@ Function Select-Subscription()
 
     Try
     {
-        Select-AzureRmSubscription -SubscriptionName $Subscription
+        Set-AzureRmContext  -SubscriptionName $Subscription -ErrorAction Stop
     }
     Catch
     {
         Write-Verbose -Message $Error[0].Exception.Message
-        Write-Verbose -Message "Exiting due to exception: Subscription Not Selected."
     }
 }
 
@@ -121,7 +120,7 @@ $StartTime = Get-Date
 # Select Subscription
 Select-Subscription $Subscription
 
-# Create DocumentDb
+# Create IoT Hub
 Create-IoTHub -Repo $Repo -Name $IoTHubName -Group $ResourceGroupName -Location $AzureLocation
 
 # Mark the finish time.

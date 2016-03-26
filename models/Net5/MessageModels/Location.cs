@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Looksfamiliar.d2c2d.MessageModels
+﻿namespace Looksfamiliar.d2c2d.MessageModels
 {
     public class Location
     {

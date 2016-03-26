@@ -17,7 +17,7 @@
     Get-Help .\Provision-IoTHub.ps1 [Null], [-Full], [-Detailed], [-Examples]
 
 .Link   
-    https://github.com/bobfamiliar/d2c2d
+    https://microservices.codeplex.com/
 
 .Parameter Subscription
     Example:  MySubscription
@@ -71,12 +71,11 @@ Function Select-Subscription()
 
     Try
     {
-        Select-AzureRmSubscription -SubscriptionName $Subscription -ErrorAction Stop
+        Set-AzureRmContext  -SubscriptionName $Subscription -ErrorAction Stop
     }
     Catch
     {
         Write-Verbose -Message $Error[0].Exception.Message
-        Write-Verbose -Message "Exiting due to exception: Subscription Not Selected."
     }
 }
 
@@ -91,7 +90,6 @@ $StartTime = Get-Date
 
 # Select Subscription
 Select-Subscription $Subscription
-$SubscriptionId = (Get-AzureRmSubscription -SubscriptionName $Subscription).SubscriptionId
 
 # Create Resource Group
 New-AzureRMResourceGroup -Name $ResourceGroup -Location $AzureLocation
@@ -99,7 +97,9 @@ New-AzureRMResourceGroup -Name $ResourceGroup -Location $AzureLocation
 # Create IoTHub
 $IoTHubName = $Prefix + "iothub" + $Suffix
 $command = $path + "\Automation\Common\Create-IoTHub.ps1"
-&$command $path $Subscription $IoTHubName $ResourceGroup $AzureLocation
+$iothub = &$command $path $Subscription $IoTHubName $ResourceGroup $AzureLocation
+
+# output iot hub onnection information
 
 # Mark the finish time.
 $FinishTime = Get-Date

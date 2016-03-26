@@ -17,7 +17,7 @@
     Get-Help .\Provision-ServiceBus.ps1 [Null], [-Full], [-Detailed], [-Examples]
 
 .Link   
-    https://github.com/bobfamiliar/d2c2d
+    https://microservices.codeplex.com/
 
 .Parameter Subscription
     Example:  MySubscription
@@ -41,7 +41,7 @@
 
 [CmdletBinding()]
 Param(
-    [Parameter(Mandatory=$True, Position=0, HelpMessage="The name of the Azure Subscription")]
+    [Parameter(Mandatory=$True, Position=0, HelpMessage="The name of the Azure Subscription for which you've imported a *.publishingsettings file.")]
     [string]$Subscription,
     [Parameter(Mandatory=$True, Position=1, HelpMessage="The name of the Azure Region/Location: East US, Central US, West US.")]
     [string]$AzureLocation,
@@ -81,8 +81,17 @@ Function Select-Subscription()
     Catch
     {
         Write-Verbose -Message $Error[0].Exception.Message
-        Write-Verbose -Message "Exiting due to exception: Subscription Not Selected."
     }
+}
+
+function GetUniqueResourceName()
+{
+    Param(
+        [Parameter(Mandatory=$true,Position=0)] [string] $resourceBaseName
+    )
+    $name = $resourceBaseName
+    $name = "{0}{1:x5}" -f $resourceBaseName, (get-random -max 1048575)
+    return $name
 }
 
 Function Create-ServiceBus-Namespace()
@@ -93,7 +102,7 @@ Function Create-ServiceBus-Namespace()
     {
         Write-Verbose -Message "[Start] Creating new Azure Service Bus Namepsace: $Namespace in $Subscription."
 
-        $AzureSBNS = New-AzureSBNamespace -Name $Namespace -NamespaceType Messaging -Location $AzureLocation -CreateACSNamespace $false -ErrorAction Stop
+        $AzureSBNS = New-AzureSBNamespace -Name $namespace -NamespaceType Messaging -Location $AzureLocation -CreateACSNamespace $false -ErrorAction Stop
 
         Write-Verbose -Message "[Finish] Created new Azure Service Bus Namepsace: $Namespace, in $AzureLocation."
     }
@@ -136,25 +145,32 @@ catch [System.Exception]
 
 #Create Service bus and queue
 $sbnamespace = $prefix + "sbname" + $suffix
+$unamespace = GetUniqueResourceName($sbnamespace)
 
-$AzureSBNS = Get-AzureSBNamespace $sbnamespace
+$AzureSBNS = Get-AzureSBNamespace $unamespace
 if ($AzureSBNS)
 {
     Write-Output "Service Bus Namespace already exists."
     $ConnStr = $AzureSBNS.ConnectionString
     Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName messagedrop
-    Write-Output -Message "Created Queue messagedrop in $sbnamespace"
+    Write-Output -Message "Created Queue messagedrop in $unamespace"
+
+    Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName alarms
+    Write-Output -Message "Created Queue messagedrop in $unamespace"
 }
 else
 {
-    $CurrentNamespace = Create-ServiceBus-Namespace -subscription $Subscription -azurelocation $AzureLocation -namespace $sbnamespace -erroraction   
-    $CurrentNamespace = Get-AzureSBNamespace -Name $sbnamespace
-    Write-Output "The $sbnamespace namespace in the $AzureLocation region has been successfully created."
+    $CurrentNamespace = Create-ServiceBus-Namespace -subscription $Subscription -azurelocation $AzureLocation -namespace $unamespace -erroraction   
+    $CurrentNamespace = Get-AzureSBNamespace -Name $unamespace
+    Write-Output "The $unamespace namespace in the $AzureLocation region has been successfully created."
 
-    $AzureSBNS = Get-AzureSBNamespace $sbnamespace
+    $AzureSBNS = Get-AzureSBNamespace $unamespace
     $ConnStr = $AzureSBNS.ConnectionString
     Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName messagedrop
-    Write-Output -Message "Created Queue messagedrop in $sbnamespace"
+    Write-Output -Message "Created Queue messagedrop in $unamespace"
+
+    Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName alarms
+    Write-Output -Message "Created Queue messagedrop in $unamespace"
 }
 
 # Mark the finish time.
