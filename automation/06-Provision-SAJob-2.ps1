@@ -198,8 +198,10 @@ INTO
 FROM
     iothub as Stream
 JOIN refdata Ref on Stream.MessageType = Ref.MessageType
-WHERE
-    (Ref.Temperature IS NOT NULL) AND (Stream.Temperature > Ref.Temperature)"
+WHERE ((Stream.Temperature > Ref.TempUpperBound) or
+       (Stream.Temperature < Ref.TempLowerBound) or
+       (Stream.Humidity > Ref.HumidityUpperBound) or
+       (Stream.Humidity < Ref.HumidityLowerBound)"
 
 $iothubname = $prefix + "iothub" + $suffix
 
