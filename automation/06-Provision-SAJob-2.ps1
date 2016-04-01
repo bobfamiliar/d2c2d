@@ -123,7 +123,8 @@ Function Create-SAJob()
                              }
                            ],
                            "container":"$StorageContainer",
-                           "blobname":"devicerules.json"
+                           "blobname":"devicerules.json",
+                           "pathPattern":"devicerules.json"
                       }
                    }
                 }
@@ -198,7 +199,7 @@ $SAJobQuery2 = "SELECT
     Stream.Temperature, 
     Stream.Humidity
 INTO
-    alarmqueue
+    queue
 FROM
     iothub as Stream
 JOIN refdata Ref on Stream.MessageType = Ref.MessageType
@@ -237,7 +238,7 @@ $SBPolicyName = $Rule.Name
 $SBPolicyKey = $Rule.Rule.PrimaryKey
 
 # create the stream analytics job
-$SAJobPath = Create-SAJob -SAJobName $sajobname2 -SAJobQuery $SAJobQuery2 -IoTHubShortName $IoTHubName -IoTHubKeyName $IoTHubKeyName -IoTHubKey $iothubkey -StorageAccountName $DefaultStorage -StorageKey $StorageKey -StorageContainer $ContainerName -AzureLocation $AzureLocation -SBNamespace $sbnamespace -SBQueueName alarms -SBPolicyName $SBPolicyName -SBPolicyKey $SBPolicyKey
+$SAJobPath = Create-SAJob -SAJobName $sajobname2 -SAJobQuery $SAJobQuery2 -IoTHubShortName $iothubshortname -IoTHubKeyName $IoTHubKeyName -IoTHubKey $iothubkey -StorageAccountName $DefaultStorage -StorageKey $storageKey.Key1 -StorageContainer $ContainerName -AzureLocation $AzureLocation -SBNamespace $sbnamespace -SBQueueName alarms -SBPolicyName $SBPolicyName -SBPolicyKey $SBPolicyKey
 New-AzureRmStreamAnalyticsJob -ResourceGroupName $ResourceGroup -Name $sajobname2 -File $SAJobPath -Force
 Start-AzureRmStreamAnalyticsJob -ResourceGroupName $ResourceGroup -Name $sajobname2
 
