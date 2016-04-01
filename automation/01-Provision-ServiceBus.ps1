@@ -152,11 +152,26 @@ if ($AzureSBNS)
 {
     Write-Output "Service Bus Namespace already exists."
     $ConnStr = $AzureSBNS.ConnectionString
-    Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName messagedrop
-    Write-Output -Message "Created Queue messagedrop in $unamespace"
 
-    Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName alarms
-    Write-Output -Message "Created Queue messagedrop in $unamespace"
+    try
+    {
+        Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName messagedrop
+        Write-Output -Message "Created Queue messagedrop in $unamespace"
+    }
+    catch [System.Exception]
+    {
+        Write-Output "ERROR: Creating Queue messagedrop in $unamespace"
+    }
+
+    try
+    {
+        Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName alarms
+        Write-Output -Message "Created Queue alarms in $unamespace"
+    }
+    catch [System.Exception]
+    {
+        Write-Output "ERROR: Creating Queue alarms in $unamespace"
+    }
 }
 else
 {
@@ -166,11 +181,26 @@ else
 
     $AzureSBNS = Get-AzureSBNamespace $unamespace
     $ConnStr = $AzureSBNS.ConnectionString
-    Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName messagedrop
-    Write-Output -Message "Created Queue messagedrop in $unamespace"
 
-    Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName alarms
-    Write-Output -Message "Created Queue messagedrop in $unamespace"
+    try
+    {
+        Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName messagedrop
+        Write-Output "Created Queue messagedrop in $unamespace"
+    }
+    catch [System.Exception]
+    {
+        Write-Output "ERROR: Creating Queue messagedrop in $unamespace"
+    }
+
+    try
+    {
+        Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName alarms
+        Write-Output "Created Queue alarms in $unamespace"
+    }
+    catch [System.Exception]
+    {
+        Write-Output "ERROR: Creating Queue alrams in $unamespace"
+    }
 }
 
 # Mark the finish time.

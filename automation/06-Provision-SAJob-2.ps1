@@ -25,7 +25,7 @@ Param(
     [Parameter(Mandatory=$True, Position=0, HelpMessage="The storage account name.")]
     [string]$Subscription,
     [Parameter(Mandatory=$True, Position=1, HelpMessage="The resource group name.")]
-    [string]$ResourceGroupName,
+    [string]$ResourceGroup,
     [Parameter(Mandatory=$True, Position=2, HelpMessage="The Azure Service Bus Name Space.")]
     [string]$AzureLocation,
     [Parameter(Mandatory=$True, Position=3, HelpMessage="The prefix for naming standards.")]
@@ -60,6 +60,9 @@ Function Create-SAJob()
     [string]$iothubshortname,
     [string]$IoTHubKeyName,
     [string]$IoTHubKey,
+    [string]$StorageAccountName,
+    [string]$StorageKey,
+    [string]$StorageContainer,
     [String]$AzureLocation, 
     [string]$SBNamespace, 
     [string]$SBQueueName, 
@@ -103,7 +106,7 @@ Function Create-SAJob()
              {  
                 "name":"refdata",
                 "properties":{  
-                   "type":"referencedata",
+                   "type":"reference",
                    "serialization":{  
                       "type":"JSON",
                       "properties":{  
@@ -112,14 +115,15 @@ Function Create-SAJob()
                    },
                    "datasource":{  
                       "type":"Microsoft.Storage/Blob",
-                      "storageAccounts": [
-                      "$StorageAccountName"
-                       ],
                       "properties": {
-                        "accountName": "$StorageAccountName",
-                        "accountKey": "$SAKeyPrimary",
-                        "container": "$StorageContainer",
-                        "pathPattern": "devicerules.json"
+                          "storageAccounts": [
+                             {
+                               "accountName" : "$StorageAccountName",
+                               "accountKey" : "$StorageKey"
+                             }
+                           ],
+                           "container":"$StorageContainer",
+                           "blobname":"devicerules.json"
                       }
                    }
                 }
@@ -201,7 +205,7 @@ JOIN refdata Ref on Stream.MessageType = Ref.MessageType
 WHERE ((Stream.Temperature > Ref.TempUpperBound) or
        (Stream.Temperature < Ref.TempLowerBound) or
        (Stream.Humidity > Ref.HumidityUpperBound) or
-       (Stream.Humidity < Ref.HumidityLowerBound)"
+       (Stream.Humidity < Ref.HumidityLowerBound))"
 
 $iothubname = $prefix + "iothub" + $suffix
 
@@ -216,15 +220,15 @@ $includePath = $Path + "\Automation\Include-ConnectionStrings.ps1"
 ."$includePath"
 
 # create a storage container
-$storagename = $Prefix + "storage" + $Suffix
-New-AzureRmStorageAccount -StorageAccountName $storagename -Location $AzureLocation -ResourceGroupName $ResourceGroup -Type Standard_GRS
-$storageKey = Get-AzureRmStorageAccountKey -ResourceGroupName $ResourceGroup -AccountName $storagename
-$StorageContext = New-AzureStorageContext -StorageAccountName $storagename -StorageAccountKey $storageKey.Key1
-New-AzureStorageContainer -Context $StorageContext -Name "refdata" -Permission Off
+
+New-AzureRmStorageAccount -StorageAccountName $DefaultStorage -Location $AzureLocation -ResourceGroupName $ResourceGroup -Type Standard_GRS
+$StorageKey = Get-AzureRmStorageAccountKey -ResourceGroupName $ResourceGroup -AccountName $DefaultStorage
+$StorageContext = New-AzureStorageContext -StorageAccountName $DefaultStorage -StorageAccountKey $storageKey.Key1
+New-AzureStorageContainer -Context $StorageContext -Name $ContainerName -Permission Off
 
 # Upload the rules file to blob storage
 $refdata = $path + "\automation\deploy\rules\devicerules.json"
-Set-AzureStorageBlobContent -Context $StorageContext -Container "refdata" -File $refdata
+Set-AzureStorageBlobContent -Context $StorageContext -Container $ContainerName -File $refdata
 
 # get the service bus connection string information
 $AzureSBNS = Get-AzureSBNamespace $sbnamespace
@@ -233,9 +237,9 @@ $SBPolicyName = $Rule.Name
 $SBPolicyKey = $Rule.Rule.PrimaryKey
 
 # create the stream analytics job
-$SAJobPath = Create-SAJob -SAJobName $sajobname2 -SAJobQuery $SAJobQuery2 -IoTHubShortName $IoTHubName -IoTHubKeyName $IoTHubKeyName -IoTHubKey $iothubkey -AzureLocation $AzureLocation -SBNamespace $sbnamespace -SBQueueName messagedrop -SBPolicyName $SBPolicyName -SBPolicyKey $SBPolicyKey
-New-AzureRmStreamAnalyticsJob -ResourceGroupName $ResourceGroupName -Name $sajobname2 -File $SAJobPath -Force
-Start-AzureRmStreamAnalyticsJob -ResourceGroupName $ResourceGroupName -Name $sajobname2
+$SAJobPath = Create-SAJob -SAJobName $sajobname2 -SAJobQuery $SAJobQuery2 -IoTHubShortName $IoTHubName -IoTHubKeyName $IoTHubKeyName -IoTHubKey $iothubkey -StorageAccountName $DefaultStorage -StorageKey $StorageKey -StorageContainer $ContainerName -AzureLocation $AzureLocation -SBNamespace $sbnamespace -SBQueueName alarms -SBPolicyName $SBPolicyName -SBPolicyKey $SBPolicyKey
+New-AzureRmStreamAnalyticsJob -ResourceGroupName $ResourceGroup -Name $sajobname2 -File $SAJobPath -Force
+Start-AzureRmStreamAnalyticsJob -ResourceGroupName $ResourceGroup -Name $sajobname2
 
 # Mark the finish time.
 $FinishTime = Get-Date
