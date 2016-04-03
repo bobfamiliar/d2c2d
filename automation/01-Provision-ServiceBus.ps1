@@ -84,7 +84,7 @@ Function Select-Subscription()
     }
 }
 
-function GetUniqueResourceName()
+function GenerateUniqueResourceName()
 {
     Param(
         [Parameter(Mandatory=$true,Position=0)] [string] $resourceBaseName
@@ -137,71 +137,30 @@ try
 
     Write-Output "The [Microsoft.ServiceBus.dll] assembly has been successfully added to the script."
 }
-
 catch [System.Exception]
 {
     Write-Output("Could not add the Microsoft.ServiceBus.dll assembly to the script. Make sure you build the solution before running the provisioning script.")
 }
 
-#Create Service bus and queue
+# Create a unique name for the namespace
 $sbnamespace = $prefix + "sbname" + $suffix
-$unamespace = GetUniqueResourceName($sbnamespace)
+$unamespace = GenerateUniqueResourceName($sbnamespace)
 
-$AzureSBNS = Get-AzureSBNamespace $unamespace
-if ($AzureSBNS)
-{
-    Write-Output "Service Bus Namespace already exists."
-    $ConnStr = $AzureSBNS.ConnectionString
+# create the namespace
+New-AzureSBNamespace -Name $unamespace -NamespaceType Messaging -Location $AzureLocation -CreateACSNamespace $false -ErrorAction Stop
 
-    try
-    {
-        Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName messagedrop
-        Write-Output -Message "Created Queue messagedrop in $unamespace"
-    }
-    catch [System.Exception]
-    {
-        Write-Output "ERROR: Creating Queue messagedrop in $unamespace"
-    }
+# get the connection string
+$AuthRule = Get-AzureSBAuthorizationRule -Namespace $unamespace
 
-    try
-    {
-        Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName alarms
-        Write-Output -Message "Created Queue alarms in $unamespace"
-    }
-    catch [System.Exception]
-    {
-        Write-Output "ERROR: Creating Queue alarms in $unamespace"
-    }
-}
-else
-{
-    $CurrentNamespace = Create-ServiceBus-Namespace -subscription $Subscription -azurelocation $AzureLocation -namespace $unamespace -erroraction   
-    $CurrentNamespace = Get-AzureSBNamespace -Name $unamespace
-    Write-Output "The $unamespace namespace in the $AzureLocation region has been successfully created."
+# Create the NamespaceManager object to create the queue
+$NamespaceManager = [Microsoft.ServiceBus.NamespaceManager]::CreateFromConnectionString($AuthRule.ConnectionString);
+Write-Host "NamespaceManager object for the [$unamespace] namespace has been successfully created."
 
-    $AzureSBNS = Get-AzureSBNamespace $unamespace
-    $ConnStr = $AzureSBNS.ConnectionString
+$NamespaceManager.CreateQueue("messagedrop");
+Write-Host "The messagedrop queue in the [$unamespace] namespace has been successfully created."
 
-    try
-    {
-        Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName messagedrop
-        Write-Output "Created Queue messagedrop in $unamespace"
-    }
-    catch [System.Exception]
-    {
-        Write-Output "ERROR: Creating Queue messagedrop in $unamespace"
-    }
-
-    try
-    {
-        Create-ServiceBus-Queue -RepoPath $Path -ConnStr $ConnStr -QueueName alarms
-        Write-Output "Created Queue alarms in $unamespace"
-    }
-    catch [System.Exception]
-    {
-        Write-Output "ERROR: Creating Queue alrams in $unamespace"
-    }
-}
+$NamespaceManager.CreateQueue("alarms");
+Write-Host "The alarms queue in the [$unamespace] namespace has been successfully created."
 
 # Mark the finish time.
 $FinishTime = Get-Date
