@@ -59,13 +59,6 @@ Param(
 $Path = Split-Path -parent $PSCommandPath
 $Path = Split-Path -parent $path
 
-#######################################################################################
-# I M P O R T S
-#######################################################################################
-
-$CreateQueue = $Path + "\Automation\Common\Create-Queue.psm1"
-Import-Module -Name $CreateQueue
-
 ##########################################################################################
 # F U N C T I O N S
 ##########################################################################################
@@ -148,19 +141,20 @@ $unamespace = GenerateUniqueResourceName($sbnamespace)
 
 # create the namespace
 New-AzureSBNamespace -Name $unamespace -NamespaceType Messaging -Location $AzureLocation -CreateACSNamespace $false -ErrorAction Stop
+Start-Sleep -Seconds 60
 
 # get the connection string
-$AuthRule = Get-AzureSBAuthorizationRule -Namespace $unamespace
+$AuthRule = Get-AzureSBAuthorizationRule -Namespace $unamespace -Name "RootManageSharedAccessKey"
 
 # Create the NamespaceManager object to create the queue
 $NamespaceManager = [Microsoft.ServiceBus.NamespaceManager]::CreateFromConnectionString($AuthRule.ConnectionString);
-Write-Host "NamespaceManager object for the [$unamespace] namespace has been successfully created."
+Write-Host "NamespaceManager object for the $unamespace namespace has been successfully created."
 
 $NamespaceManager.CreateQueue("messagedrop");
-Write-Host "The messagedrop queue in the [$unamespace] namespace has been successfully created."
+Write-Host "The messagedrop queue in the $unamespace namespace has been successfully created."
 
 $NamespaceManager.CreateQueue("alarms");
-Write-Host "The alarms queue in the [$unamespace] namespace has been successfully created."
+Write-Host "The alarms queue in the $unamespace namespace has been successfully created."
 
 # Mark the finish time.
 $FinishTime = Get-Date
