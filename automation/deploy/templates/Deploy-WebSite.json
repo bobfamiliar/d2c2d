@@ -11,16 +11,16 @@
         "siteLocation": {
             "type": "string"
         },
-        "sku": {
-            "type": "string",
-            "defaultValue": "Free",
-            "allowedValues": [
-                "Free",
-                "Shared",
-                "Basic",
-                "Standard"
-            ]
-        },
+      "sku": {
+        "type": "string",
+        "defaultValue": "Standard",
+        "allowedValues": [
+          "Free",
+          "Shared",
+          "Basic",
+          "Standard"
+        ]
+      },
         "workerSize": {
             "type": "string",
             "defaultValue": "0",
@@ -44,7 +44,7 @@
                 "name": "[parameters('hostingPlanName')]",
                 "sku": "[parameters('sku')]",
                 "workerSize": "[parameters('workerSize')]",
-                "numberOfWorkers": 0
+                "numberOfWorkers": 3
             }
         },
         {

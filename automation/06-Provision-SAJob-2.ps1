@@ -225,11 +225,11 @@ $includePath = $Path + "\Automation\Include-ConnectionStrings.ps1"
 New-AzureRmStorageAccount -StorageAccountName $DefaultStorage -Location $AzureLocation -ResourceGroupName $ResourceGroup -Type Standard_GRS
 $StorageKey = Get-AzureRmStorageAccountKey -ResourceGroupName $ResourceGroup -AccountName $DefaultStorage
 $StorageContext = New-AzureStorageContext -StorageAccountName $DefaultStorage -StorageAccountKey $storageKey.Key1
-New-AzureStorageContainer -Context $StorageContext -Name $ContainerName -Permission Off
+New-AzureStorageContainer -Context $StorageContext -Name $ArchiveContainerName -Permission Off
 
 # Upload the rules file to blob storage
 $refdata = $path + "\automation\deploy\rules\devicerules.json"
-Set-AzureStorageBlobContent -Context $StorageContext -Container $ContainerName -File $refdata
+Set-AzureStorageBlobContent -Context $StorageContext -Container $ArchiveContainerName -File $refdata
 
 # get the service bus connection string information
 $AzureSBNS = Get-AzureSBNamespace $sbnamespace
@@ -238,7 +238,7 @@ $SBPolicyName = $Rule.Name
 $SBPolicyKey = $Rule.Rule.PrimaryKey
 
 # create the stream analytics job
-$SAJobPath = Create-SAJob -SAJobName $sajobname2 -SAJobQuery $SAJobQuery2 -IoTHubShortName $iothubshortname -IoTHubKeyName $IoTHubKeyName -IoTHubKey $iothubkey -StorageAccountName $DefaultStorage -StorageKey $storageKey.Key1 -StorageContainer $ContainerName -AzureLocation $AzureLocation -SBNamespace $sbnamespace -SBQueueName alarms -SBPolicyName $SBPolicyName -SBPolicyKey $SBPolicyKey
+$SAJobPath = Create-SAJob -SAJobName $sajobname2 -SAJobQuery $SAJobQuery2 -IoTHubShortName $iothubshortname -IoTHubKeyName $IoTHubKeyName -IoTHubKey $iothubkey -StorageAccountName $DefaultStorage -StorageKey $storageKey.Key1 -StorageContainer $ArchiveContainerName -AzureLocation $AzureLocation -SBNamespace $sbnamespace -SBQueueName alarms -SBPolicyName $SBPolicyName -SBPolicyKey $SBPolicyKey
 New-AzureRmStreamAnalyticsJob -ResourceGroupName $ResourceGroup -Name $sajobname2 -File $SAJobPath -Force
 Start-AzureRmStreamAnalyticsJob -ResourceGroupName $ResourceGroup -Name $sajobname2
 
