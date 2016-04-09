@@ -18,14 +18,14 @@
 
     Get-Help .\Build-Models.ps1 [Null], [-Full], [-Detailed], [-Examples]
 
-.Parameter Repo
-    Example:  c:\users\bob\source\repos\d2c2d
+.Parameter Path
+    Example:  c:\users\bob\source\Paths\d2c2d
 .Parameter Configuration
     Example:  Debug
 .Example
-    .\Build-Models.ps1 -repo "c:\users\bob\source\repos\d2c2d" -configuration "debug"
+    .\Build-Models.ps1 -Path "c:\users\bob\source\Paths\d2c2d" -configuration "debug"
 .Inputs
-    The [Repo] parameter is the path to the top level folder of the Git Repo.
+    The [Path] parameter is the path to the top level folder of the Git Path.
     The [Configuration] parameter is the build configuration such as Debug or Release
 .Outputs
     Console
@@ -33,8 +33,8 @@
 
 [CmdletBinding()]
 Param(
-    [Parameter(Mandatory=$True, Position=0, HelpMessage="The Path to the Git Repo")]
-    [string]$repo,
+    [Parameter(Mandatory=$True, Position=0, HelpMessage="The Path to the Git Path")]
+    [string]$Path,
     [Parameter(Mandatory=$True, Position=1, HelpMessage="Build configuration such as Debug or Release")]
     [string]$configuration
 )
@@ -43,8 +43,8 @@ Param(
 # I M P O R T S
 #######################################################################################
 
-$msbuildScriptPath = $repo + "\Automation\Common\Invoke-MsBuild.psm1"
-$nugetInvokeScriptPath = $repo + "\Automation\Common\Invoke-NuGet.psm1"
+$msbuildScriptPath = $Path + "\Automation\Common\Invoke-MsBuild.psm1"
+$nugetInvokeScriptPath = $Path + "\Automation\Common\Invoke-NuGet.psm1"
 
 Import-Module -Name $msbuildScriptPath
 Import-Module -Name $nugetInvokeScriptPath
@@ -54,7 +54,7 @@ Import-Module -Name $nugetInvokeScriptPath
 #######################################################################################
 
 $msbuildargsBuild = "/t:clean /t:Rebuild /p:Configuration=" + $configuration + " /v:normal"
-$packagedrop = $repo + "\nugets"
+$packagedrop = $Path + "\nugets"
 
 #######################################################################################
 # F U C N T I O N S
@@ -76,7 +76,7 @@ Function Build-Status { param ($success, $project, $operation)
     Write-Verbose -Message $message -Verbose
 }
 
-Function Copy-Nuget { param ($assembly, $path)
+Function Copy-Nuget {
 
     $nuget = ".\*.nupkg"
     Move-Item $nuget -Destination $packagedrop
@@ -93,7 +93,7 @@ Function Build-Project { param ($assembly, $path)
 # C L E A N 
 #######################################################################################
 
-$devicepack = $repo + "\nugets\*messagemodels*.*"
+$devicepack = $Path + "\nugets\*messagemodels*.*"
 Remove-Item $devicepack -WhatIf
 Remove-Item $devicepack -Force
 
@@ -101,18 +101,18 @@ Remove-Item $devicepack -Force
 # M O D E L S
 #######################################################################################
 
-$path = $repo + "\models\net4"
+$assemblypath = $Path + "\models\net4"
 $assembly = "messagemodels"
 
-Invoke-Nuget $assembly $path $repo restorePackages
-Build-Project $assembly $path
-Invoke-Nuget $assembly $path $repo pack
-Copy-Nuget $assembly $path
+Invoke-Nuget $assembly $assemblypath $Path restorePackages
+Build-Project $assembly $assemblypath
+Invoke-Nuget $assembly $assemblypath $Path pack
+Copy-Nuget $assembly $assemblypath
 
-$path = $repo + "\models\net5"
+$assemblypath = $Path + "\models\net5"
 $assembly = "messagemodels"
 
-Invoke-Nuget $assembly $path $repo restoreProjectJson
-Build-Project $assembly $path
-Invoke-Nuget $assembly $path $repo pack
-Copy-Nuget $assembly $path
+Invoke-Nuget $assembly $assemblypath $Path restoreProjectJson
+Build-Project $assembly $assemblypath
+Invoke-Nuget $assembly $assemblypath $Path pack
+Copy-Nuget $assembly $assemblypath

@@ -2,7 +2,7 @@
 # C O N N E C T I O N  S T R I N G S
 ##################################################################
 
-$provisionOutputPath = $Path + "\automation\provision-output.json"
+$provisionOutputPath = $Path + "\automation\provision-$ResourceGroup-output.json"
 
 $provisionInfo = ConvertFrom-Json -InputObject (Gc $provisionOutputPath -Raw)
 

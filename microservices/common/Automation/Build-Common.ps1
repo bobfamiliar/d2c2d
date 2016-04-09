@@ -18,14 +18,14 @@
 
     Get-Help .\Build-Common.ps1 [Null], [-Full], [-Detailed], [-Examples]
 
-.Parameter Repo
-    Example:  c:\users\bob\source\repos\looksfamiliar
+.Parameter Path
+    Example:  c:\users\bob\source\Paths\looksfamiliar
 .Parameter Configuration
     Example:  Debug
 .Example
-    .\Build-Common.ps1 -repo "c:\users\bob\source\repos\looksfamiliar" -configuration "debug"
+    .\Build-Common.ps1 -Path "c:\users\bob\source\Paths\looksfamiliar" -configuration "debug"
 .Inputs
-    The [Repo] parameter is the path to the top level folder of the Git Repo.
+    The [Path] parameter is the path to the top level folder of the Git Path.
     The [Configuration] parameter is the build configuration such as Debug or Release
 .Outputs
     Console
@@ -33,8 +33,8 @@
 
 [CmdletBinding()]
 Param(
-    [Parameter(Mandatory=$True, Position=0, HelpMessage="The Path to the Git Repo")]
-    [string]$repo,
+    [Parameter(Mandatory=$True, Position=0, HelpMessage="The Path to the Git Path")]
+    [string]$Path,
     [Parameter(Mandatory=$True, Position=1, HelpMessage="Build Confiuguration such as Debug or Release")]
     [string]$configuration
 )
@@ -43,9 +43,9 @@ Param(
 # I M P O R T S
 #######################################################################################
 
-$msbuildScriptPath = $repo + "\Automation\Common\Invoke-MsBuild.psm1"
-$nugetUpdateScriptPath = $repo + "\Automation\Common\Invoke-UpdateNuGet.psm1"
-$nugetInvokeScriptPath = $repo + "\Automation\Common\Invoke-NuGet.psm1"
+$msbuildScriptPath = $Path + "\Automation\Common\Invoke-MsBuild.psm1"
+$nugetUpdateScriptPath = $Path + "\Automation\Common\Invoke-UpdateNuGet.psm1"
+$nugetInvokeScriptPath = $Path + "\Automation\Common\Invoke-NuGet.psm1"
 
 Import-Module -Name $msbuildScriptPath
 Import-Module -Name $nugetUpdateScriptPath
@@ -71,15 +71,15 @@ function Build-Status { param ($success, $project)
     Write-Verbose $message -Verbose
 }
 
-Function Copy-Nuget { param ($assembly, $path)
+Function Copy-Nuget {
 
     $nuget = ".\*.nupkg"
     Move-Item $nuget -Destination $packagedrop
 }
 
-Function Build-Project { param ($assembly, $path)
+Function Build-Project { param ($assembly, $assemblypath)
 
-    $sol = $path + "\" + $assembly + ".sln"
+    $sol = $assemblypath + "\" + $assembly + ".sln"
     $buildSucceeded = Invoke-MsBuild -Path $sol -MsBuildParameters $msbuildargs
     Build-Status $buildSucceeded $assembly
 }
@@ -88,11 +88,11 @@ Function Build-Project { param ($assembly, $path)
 # C L E A N 
 #######################################################################################
 
-$wirepack = $repo + "\nugets\*wire*.*"
+$wirepack = $Path + "\nugets\*wire*.*"
 Remove-Item $wirepack -WhatIf
 Remove-Item $wirepack -Force
 
-$storepack = $repo + "\nugets\*store*.*"
+$storepack = $Path + "\nugets\*store*.*"
 Remove-Item $storepack -WhatIf
 Remove-Item $storepack -Force
 
@@ -101,29 +101,28 @@ Remove-Item $storepack -Force
 #######################################################################################
 
 $msbuildargs = "/t:clean /t:Rebuild /p:Configuration=" + $configuration + " /v:normal"
-$packagesFolder = $path + "\packages\*.*"
-$packagedrop = $repo + "\nugets"
+$packagedrop = $Path + "\nugets"
 
 #######################################################################################
 # B U I L D  W I R E
 #######################################################################################
 
-$path = $repo + "\Microservices\Common\Wire"
+$assemblypath = $Path + "\Microservices\Common\Wire"
 $assembly = "Wire"
 
-Invoke-Nuget $assembly $path $repo restore
-Build-Project $assembly $path
-Invoke-Nuget $assembly $path $repo pack
-Copy-Nuget $assembly $path
+Invoke-Nuget $assembly $assemblypath $Path restore
+Build-Project $assembly $assemblypath
+Invoke-Nuget $assembly $assemblypath $Path pack
+Copy-Nuget $assembly $assemblypath
 
 #######################################################################################
 # B U I L D  S T O R E
 #######################################################################################
 
-$path = $repo + "\Microservices\Common\Store"
+$assemblypath = $Path + "\Microservices\Common\Store"
 $assembly = "Store"
 
-Invoke-Nuget $assembly $path $repo restore
-Build-Project $assembly $path
-Invoke-Nuget $assembly $path $repo pack
-Copy-Nuget $assembly $path
+Invoke-Nuget $assembly $assemblypath $Path restore
+Build-Project $assembly $assemblypath
+Invoke-Nuget $assembly $assemblypath $Path pack
+Copy-Nuget $assembly $assemblypath

@@ -161,7 +161,7 @@ Try
 "@
     $ParamsPath = $Path + "\Automation\Templates\d2c2d-arm-template-params.json"
     $TemplatePath = $Path + "\Automation\Templates\d2c2d-arm-template.json"
-    $OutputPath = $Path + "\Automation\provision-output.json"
+    $OutputPath = $Path + "\Automation\provision-$ResourceGroup-output.json"
 
     $JSON | Set-Content -Path $ParamsPath
 
