@@ -6,7 +6,7 @@ param
     [parameter(Mandatory = $true)][String]
     $ResourceGroupName,
     [parameter(Mandatory = $true)][String]
-    $Location,
+    $AzureLocation,
     [Parameter(Mandatory = $true)][String]
     $DeploymentName,
     [Parameter(Mandatory = $true)][String]
@@ -42,17 +42,16 @@ $Error.Clear()
 
 Set-StrictMode -Version 3
 
-$TemplateFile = $Repo + "\Automation\Deploy\Templates\Deploy-WebSite.json"
+$TemplateFile = $Repo + "\Automation\templates\d2c2d-arm-template-appsite.json"
 $WebDeployPackage = $Repo + "\Automation\Deploy\Packages\" + $DeploymentName + "\" + $DeploymentName + ".zip"
 
 # Upload the deploy package to a blob in our storage account, so that
-#   the MSDeploy extension can access it.  Create the container if it
-#   doesn't already exist.
+# the MSDeploy extension can access it.  Create the container if it doesn't already exist.
 $containerName = 'msdeploypackages'
 $blobName = (Get-Date -Format 'ssmmhhddMMyyyy') + '-' + $ResourceGroupName + '-' + $DeploymentName + '-WebDeployPackage.zip'
 
-$storageKey = Get-AzureRmStorageAccountKey -ResourceGroupName $ResourceGroup -AccountName $DefaultStorage
-$StorageContext = New-AzureStorageContext -StorageAccountName $DefaultStorage -StorageAccountKey $storageKey.Key1
+$storageKey = Get-AzureRmStorageAccountKey -ResourceGroupName $ResourceGroup -AccountName $storageAccountName
+$StorageContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageKey.Key1
 
 # Use the CurrentStorageAccount which is set by Set-AzureSubscription
 if (!(Get-AzureStorageContainer -Context $StorageContext -Name $ContainerName -ErrorAction SilentlyContinue)) 
@@ -65,13 +64,15 @@ Set-AzureStorageBlobContent -Context $StorageContext -Blob $blobName -Container 
 #   access to the package.
 $webDeployPackageUri = New-AzureStorageBlobSASToken -Context $StorageContext -Container $ContainerName -Blob $blobName -Permission r -FullUri
 
-$ParametersFile = $Repo + "\Automation\Deploy\Templates\" + $SiteName + ".json"
+$ParametersFile = $Repo + "\Automation\Templates\d2c2d-arm-template-params-appsite.json"
 $JSON = @"
 {
     "parameterValues": {
-        "siteName": "$SiteName",
-        "hostingPlanName": "$ServicePlan",
-        "siteLocation": "$Location",
+        "azureLocation": "$AzureLocation",
+        "appSiteName": "$SiteName",
+        "appServicePlan": "$ServicePlan",
+        "appServicePlanSku": "Standard",
+        "appServicePlanSkuSize": "0",
         "msdeployPackageUri":"$WebDeployPackageUri"
     }
 }
