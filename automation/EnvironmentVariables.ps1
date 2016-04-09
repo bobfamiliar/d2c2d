@@ -25,4 +25,4 @@ $sbalertsqueue = "alarms"
 # A P I  S H A R E D  S E C R E T
 ##################################################################
 
-$SharedSecret = "dead41b6-43fa-432d-a366-29cd562f44b2"
+$SharedSecret = ""
