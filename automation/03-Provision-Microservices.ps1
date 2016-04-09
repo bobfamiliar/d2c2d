@@ -18,13 +18,13 @@ $Path = Split-Path -parent $PSCommandPath
 $path = Split-Path -parent $path
 
 $command = $Path + "\models\automation\Build-Models.ps1"
-&$command -repo $Path -configuration $Configuration
+&$command -Path $Path -configuration $Configuration
 
 $command = $Path + "\microservices\common\automation\Build-Common.ps1"
-&$command -repo $Path -configuration $Configuration
+&$command -Path $Path -configuration $Configuration
 
 $command = $Path + "\microservices\provision\automation\01-Build-ProvisionM.ps1"
-&$command -repo $Path -configuration $Configuration
+&$command -Path $Path -configuration $Configuration
 
 $command = $Path + "\microservices\provision\automation\02-Deploy-ProvisionM.ps1"
-&$command -repo $Path -Subscription $Subscription -ResourceGroup $ResourceGroup -AzureLocation $AzureLocation -Prefix $Prefix -Suffix $Suffix -DeployData:$true
+&$command -Path $Path -Subscription $Subscription -ResourceGroup $ResourceGroup -AzureLocation $AzureLocation -Prefix $Prefix -Suffix $Suffix -DeployData:$true
