@@ -17,8 +17,8 @@
 
     Get-Help .\Deploy-ProvisionM.ps1 [Null], [-Full], [-Detailed], [-Examples]
 
-.Parameter Repo
-    Example:  c:\users\bob\source\repos\looksfamiliar
+.Parameter Path
+    Example:  c:\users\bob\source\Paths\looksfamiliar
 .Parameter Subscription
     Example:  MySubscription
 .Parameter AzureLocation
@@ -28,7 +28,7 @@
 .Parameter Suffix
     Example:  test
 .Inputs
-    The [Repo] parameter is the path to the Git Repo
+    The [Path] parameter is the path to the Git Path
     The [Subscription] parameter is the name of the client Azure subscription.
     The [AzureLocation] parameter is the name of the Azure Region/Location to host the Virtual Machines for this subscription.
     The [Prefix] parameter is the common prefix that will be used to name resources
@@ -39,8 +39,8 @@
 
 [CmdletBinding()]
 Param(
-    [Parameter(Mandatory=$True, Position=0, HelpMessage="The path to the Git Repo.")]
-    [string]$Repo,
+    [Parameter(Mandatory=$True, Position=0, HelpMessage="The path to the Git Path.")]
+    [string]$path,
     [Parameter(Mandatory=$True, Position=1, HelpMessage="The name of the Azure Subscription.")]
     [string]$Subscription,
     [Parameter(Mandatory=$True, Position=2, HelpMessage="The Resource Group.")]
@@ -58,9 +58,7 @@ Param(
 # V A R I A B L E S
 #######################################################################################
 
-$Path = $Repo
-
-$includePath = $Repo + "\Automation\EnvironmentVariables.ps1"
+$includePath = $Path + "\Automation\EnvironmentVariables.ps1"
 ."$includePath"
 
 # names for app service plans
@@ -106,17 +104,17 @@ Select-Subscription $Subscription
 if ($DeployData)
 {
     $connStr = $docDbConnectionString + ";Database=" + $DocDbName
-    $command = $repo + "\Automation\Common\Load-DocDb.ps1"
-    &$command -Repo $Repo -DocDbConnStr $connStr -CollectionName $DocDbCollectionName
+    $command = $Path + "\Automation\Common\Load-DocDb.ps1"
+    &$command -Path $Path -DocDbConnStr $connStr -CollectionName $DocDbCollectionName
 }
 
 # Package the APIs
-$command = $repo + "\microservices\provision\automation\Package-ProvisionM.ps1"
-&$command -repo $Repo
+$command = $Path + "\microservices\provision\automation\Package-ProvisionM.ps1"
+&$command -Path $Path
 
 # Deploy the API and update the app settings for documentdb
-$command = $repo + "\Automation\Common\Publish-WebSite.ps1"
-&$command -Repo $Repo -ResourceGroupName $ResourceGroup -DeploymentName ProvisionAPI -AzureLocation $AzureLocation -SiteName $ProvisionAPI -ServicePlan $ProvisionM_SP 
+$command = $Path + "\Automation\Common\Publish-AppService.ps1"
+&$command -Path $Path -ResourceGroupName $ResourceGroup -DeploymentName ProvisionAPI -AzureLocation $AzureLocation -SiteName $ProvisionAPI -ServicePlan $ProvisionM_SP 
 
 $Properties = @{
     "docdburi" = "$docDbURI";
@@ -126,7 +124,7 @@ $Properties = @{
 }
 
 # Publish the app settings
-$command = $repo + "\Automation\Common\Publish-AppSettings.ps1"
+$command = $Path + "\Automation\Common\Publish-AppSettings.ps1"
 &$command -AzureLocation $AzureLocation -ResourceGroupName $ResourceGroup -SiteName $ProvisionAPI -Settings appsettings -Properties $Properties
 
 # Mark the finish time.

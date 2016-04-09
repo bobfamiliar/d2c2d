@@ -1,22 +1,22 @@
 ﻿[CmdletBinding()]
 Param(
     [Parameter(Mandatory=$True, Position=0, HelpMessage="The Path to the Git Repo")]
-    [string]$repo
+    [string]$Path
 )
 
 #######################################################################################
 # I M P O R T S
 #######################################################################################
 
-$msbuildScriptPath = $repo + "\Automation\Common\Invoke-MsBuild.psm1"
+$msbuildScriptPath = $Path + "\Automation\Common\Invoke-MsBuild.psm1"
 Import-Module -Name $msbuildScriptPath
 
 #######################################################################################
 # V A R I A B L E S
 #######################################################################################
 
-$msbuildargsPackage = "/t:Package /P:PackageLocation=" + $repo + "\Automation\Deploy\Packages\"
-$packagedrop = $repo + "\packages"
+$msbuildargsPackage = "/t:Package /P:PackageLocation=" + $Path + "\Automation\Deploy\Packages\"
+$packagedrop = $Path + "\packages"
 
 #######################################################################################
 # F U C N T I O N S
@@ -38,9 +38,9 @@ Function Build-Status { param ($success, $project, $operation)
     Write-Verbose -Message $message -Verbose
 }
 
-Function Publish-WebSite { param ($assembly, $path)
+Function Publish-WebSite { param ($assembly, $assemblypath)
 
-    $sol = $path + "\" + $assembly + "\" + $assembly + ".csproj"
+    $sol = $assemblypath + "\" + $assembly + "\" + $assembly + ".csproj"
     $packageArgs = $msbuildargsPackage + $assembly
     $buildSucceeded = Invoke-MsBuild -Path $sol -MsBuildParameters $packageArgs
     Build-Status $buildSucceeded $assembly "package"
@@ -50,7 +50,7 @@ Function Publish-WebSite { param ($assembly, $path)
 # A P I S
 #######################################################################################
 
-$path = $repo + "\Microservices\Provision\API"
+$assemblypath = $Path + "\Microservices\Provision\API"
 $assembly = "ProvisionAPI"
 
-Publish-WebSite $assembly $path
+Publish-WebSite $assembly $assemblypath
