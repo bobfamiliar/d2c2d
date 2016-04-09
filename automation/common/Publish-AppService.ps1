@@ -2,7 +2,7 @@
 param
 (
     [parameter(Mandatory = $true)][String]
-    $Repo,
+    $Path,
     [parameter(Mandatory = $true)][String]
     $ResourceGroupName,
     [parameter(Mandatory = $true)][String]
@@ -42,8 +42,8 @@ $Error.Clear()
 
 Set-StrictMode -Version 3
 
-$TemplateFile = $Repo + "\Automation\templates\d2c2d-arm-template-appsite.json"
-$WebDeployPackage = $Repo + "\Automation\Deploy\Packages\" + $DeploymentName + "\" + $DeploymentName + ".zip"
+$TemplateFile = $Path + "\Automation\templates\d2c2d-arm-template-appservice.json"
+$WebDeployPackage = $Path + "\Automation\Deploy\Packages\" + $DeploymentName + "\" + $DeploymentName + ".zip"
 
 # Upload the deploy package to a blob in our storage account, so that
 # the MSDeploy extension can access it.  Create the container if it doesn't already exist.
@@ -64,7 +64,7 @@ Set-AzureStorageBlobContent -Context $StorageContext -Blob $blobName -Container 
 #   access to the package.
 $webDeployPackageUri = New-AzureStorageBlobSASToken -Context $StorageContext -Container $ContainerName -Blob $blobName -Permission r -FullUri
 
-$ParametersFile = $Repo + "\Automation\Templates\d2c2d-arm-template-params-appsite.json"
+$ParametersFile = $Path + "\Automation\Templates\d2c2d-arm-template-params-appservice.json"
 $JSON = @"
 {
     "parameterValues": {
