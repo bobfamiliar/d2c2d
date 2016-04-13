@@ -21,13 +21,13 @@ namespace Looksfamiliar.d2c2d.MessageModels
         public ClimateSettings()
         {
             MinHumidity = 0;
-            MaxHumiditiy = 0;
+            MaxHumidity = 0;
             MinTemperature = 0;
             MaxTemperature = 0;
         }
 
         public double MinHumidity { get; set; }
-        public double MaxHumiditiy { get; set; }
+        public double MaxHumidity { get; set; }
         public double MinTemperature { get; set; }
         public double MaxTemperature { get; set; }
     }

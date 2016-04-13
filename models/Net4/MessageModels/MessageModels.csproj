@@ -53,6 +53,7 @@
     <Compile Include="DeviceManifest.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="MessageBase.cs" />
+    <Compile Include="Ping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
